@@ -1,0 +1,19 @@
+{
+  "name": "back-end-final-project-communiteam",
+  "version": "1.0.0",
+  "description": "communiteam back-end",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SchoolOfCode/back-end-final-project-communiteam.git"
+  },
+  "author": "communiteam",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SchoolOfCode/back-end-final-project-communiteam/issues"
+  },
+  "homepage": "https://github.com/SchoolOfCode/back-end-final-project-communiteam#readme"
+}
