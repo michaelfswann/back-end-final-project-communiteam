@@ -3,7 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "create-table": "node -r dotenv/config ./server/db/scripts/create-table.js",
+    "drop-table": "node -r dotenv/config ./server/db/scripts/drop-table.js"
+
+  
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
