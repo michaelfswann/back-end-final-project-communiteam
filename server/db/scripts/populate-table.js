@@ -1,9 +1,12 @@
 const { query } = require('../../config/index')
 
+const sqlStatement = 'INSERT INTO event_table (title, date, speaker, banner, description, numtickets, location) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING title;'
+
+
 async function addEvent(event) {
-    console.log(event)
-    const res = await query(
-        'INSERT INTO event_table (title, date, speaker, banner, description, numtickets, location) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING title;',
+   
+    const res = await query(sqlStatement
+        ,
         [
             event.title,
             event.date,
