@@ -5,7 +5,9 @@
   "scripts": {
     "start": "node ./bin/www",
     "create-table": "node -r dotenv/config ./server/db/scripts/create-table.js",
-    "drop-table": "node -r dotenv/config ./server/db/scripts/drop-table.js"
+    "drop-table": "node -r dotenv/config ./server/db/scripts/drop-table.js",
+    "populate-table": "node -r dotenv/config ./server/db/scripts/populate-table.js"
+
 
   
   },
