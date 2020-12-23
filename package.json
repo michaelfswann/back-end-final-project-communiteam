@@ -5,9 +5,9 @@
   "scripts": {
     "start": "node ./server/bin/www",
     "dev": "nodemon -r dotenv/config ./server/bin/www",
-    "create-table": "node -r dotenv/config ./server/db/scripts/create-table.js",
-    "drop-table": "node -r dotenv/config ./server/db/scripts/drop-table.js",
-    "populate-table": "node -r dotenv/config ./server/db/scripts/populate-table.js"
+    "create-events-table": "node -r dotenv/config ./server/db/scripts/events-table/create-table.js",
+    "drop-events-table": "node -r dotenv/config ./server/db/scripts/events-table/drop-table.js",
+    "populate-events-table": "node -r dotenv/config ./server/db/scripts/events-table/populate-table.js"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
