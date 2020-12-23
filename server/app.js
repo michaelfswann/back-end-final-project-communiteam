@@ -6,6 +6,7 @@ var logger = require('morgan')
 //var indexRouter = require('./routes/index');
 var eventsRouter = require('./routes/events')
 var ticketsRouter = require('./routes/tickets')
+var accountsRouter = require('./routes/accounts')
 
 var app = express()
 
@@ -18,5 +19,6 @@ app.use(express.static(path.join(__dirname, 'public')))
 //app.use('/', indexRouter);
 app.use('/events', eventsRouter)
 app.use('/tickets', ticketsRouter)
+app.use('/accounts', accountsRouter)
 
 module.exports = app

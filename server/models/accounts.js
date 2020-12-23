@@ -37,7 +37,7 @@ async function updateAccountByUid(uid, details) {
 async function deleteAccountByUid(uid) {
     const result = await query(
         `DELETE FROM accounts_table WHERE uid = $1 RETURNING uid`,
-        [id]
+        [uid]
     )
     console.log(result)
     return result.rows[0]

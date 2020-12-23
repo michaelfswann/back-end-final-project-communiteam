@@ -2,52 +2,47 @@ var express = require('express')
 var router = express.Router()
 
 const {
-    getAllEvents,
-    getEventById,
-    addEvent,
-    updateEventById,
-    deleteEventById,
-    getAllEventsAfterCurrentDate
-} = require('../models/index')
+    getAllAccounts,
+    getAccountByUid,
+    addAccount,
+    updateAccountByUid,
+    deleteAccountByUid
+} = require('../models/accounts')
 
 router.get('/', async function (req, res, next) {
-    const events = await getAllEvents()
-    res.json({ success: true, payload: events })
-})
-router.get('/date', async function (req, res, next) {
-    const events = await getAllEventsAfterCurrentDate()
+    const events = await getAllAccounts()
     res.json({ success: true, payload: events })
 })
 
-router.get('/:id', async function (req, res, next) {
-    const id = req.params.id
-    const event = await getEventById(id)
+router.get('/:uid', async function (req, res, next) {
+    const uid = req.params.uid
+    const event = await getAccountByUid(uid)
     res.json({ success: true, payload: event })
 })
 
 router.post('/', async function (req, res, next) {
     const data = req.body
-    const result = await addEvent(data)
+    const result = await addAccount(data)
     res.json({ success: true, payload: result })
 })
 
-router.patch('/:id', async function (req, res) {
-    const id = req.params.id
+router.patch('/:uid', async function (req, res) {
+    const uid = req.params.uid
     const details = req.body
-    const result = await updateEventById(id, details)
+    const result = await updateAccountByUid(uid, details)
     console.log(result)
     res.json({
         success: true,
-        payload: `Event with id ${result.id} has been updated.`
+        payload: `Account with uid: ${result.uid} has been updated.`
     })
 })
 
-router.delete('/:id', async function (req, res) {
-    const eventId = req.params.id
-    const { id } = await deleteEventById(eventId)
+router.delete('/:uid', async function (req, res) {
+    const accountId = req.params.uid
+    const { uid } = await deleteAccountByUid(accountId)
     res.json({
         success: true,
-        payload: `Event with id of ${id} has been deleted.`
+        payload: `Account with uid of ${uid} has been deleted.`
     })
 })
 
