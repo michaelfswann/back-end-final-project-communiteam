@@ -7,7 +7,10 @@
     "dev": "nodemon -r dotenv/config ./server/bin/www",
     "create-events-table": "node -r dotenv/config ./server/db/scripts/events-table/create-table.js",
     "drop-events-table": "node -r dotenv/config ./server/db/scripts/events-table/drop-table.js",
-    "populate-events-table": "node -r dotenv/config ./server/db/scripts/events-table/populate-table.js"
+    "populate-events-table": "node -r dotenv/config ./server/db/scripts/events-table/populate-table.js",
+    "create-tickets-table": "node -r dotenv/config ./server/db/scripts/tickets-table/create-table.js",
+    "drop-tickets-table": "node -r dotenv/config ./server/db/scripts/tickets-table/drop-table.js",
+    "populate-tickets-table": "node -r dotenv/config ./server/db/scripts/tickets-table/populate-table.js"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
