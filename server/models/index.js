@@ -1,7 +1,7 @@
 const { query } = require('../config/index.js')
 
 async function getAllEvents() {
-    const result = await query('SELECT * FROM event_table')
+    const result = await query('SELECT * FROM event_table ORDER BY id ASC')
     return result.rows
 }
 
@@ -11,7 +11,7 @@ async function getEventById(id) {
 }
 
 async function addEvent(event) {
-    const res = await query(
+    const result = await query(
         `INSERT INTO event_table (title, date, speaker, banner, description, numtickets, location) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING title;`,
         [
             event.title,
@@ -23,8 +23,57 @@ async function addEvent(event) {
             event.location
         ]
     )
-    console.log(`added new event: ${res.rows[0].title}`)
-    return res.rows
+    console.log(`added new event: ${result.rows[0].title}`)
+    return result.rows
 }
 
-module.exports = { getAllEvents, getEventById, addEvent }
+async function updateEventById(id, details) {
+    const {
+        title,
+        date,
+        speaker,
+        banner,
+        description,
+        numtickets,
+        location
+    } = details
+    const result = await query(
+        `UPDATE event_table 
+        SET 
+        title = COALESCE($2, title),
+        date = COALESCE($3, date),
+        speaker = COALESCE($4, speaker),
+        banner = COALESCE($5, banner),
+        description = COALESCE($6, description),
+        numtickets = COALESCE($7, numtickets),
+        location = COALESCE($8, location)
+        WHERE id = $1 RETURNING id`,
+        [id, title, date, speaker, banner, description, numtickets, location]
+    )
+    return result.rows[0]
+}
+
+async function deleteEventById(id) {
+    const result = await query(
+        `DELETE FROM event_table WHERE id = $1 RETURNING id`,
+        [id]
+    )
+    console.log(result)
+    return result.rows[0]
+}
+
+async function getAllEventsAfterCurrentDate() {
+    const result = await query(
+        'SELECT * FROM event_table WHERE date >= CURRENT_DATE'
+    )
+    return result.rows
+}
+
+module.exports = {
+    getAllEvents,
+    getEventById,
+    addEvent,
+    updateEventById,
+    deleteEventById,
+    getAllEventsAfterCurrentDate
+}
