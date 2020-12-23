@@ -1,13 +1,13 @@
 const { query } = require('../../../config/index')
 
-const sqlStatement = `CREATE TABLE IF NOT EXISTS event_table (
-    id SERIAL PRIMARY KEY, title TEXT, date DATE, speaker TEXT, banner TEXT, description TEXT, numtickets INT, location TEXT
+const sqlStatement = `CREATE TABLE IF NOT EXISTS accounts_table (
+    uid TEXT PRIMARY KEY NOT NULL, email TEXT, is_volunteer BOOLEAN, created_at TIMESTAMP NOT NULL DEFAULT NOW()
     )`
 
-async function createEventTable() {
+async function createAccountsTable() {
     const res = await query(sqlStatement)
 
-    console.log(`Log: created table called event_table`)
+    console.log(`Log: created table called accounts_table`)
 }
 
-createEventTable()
+createAccountsTable()
