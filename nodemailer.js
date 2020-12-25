@@ -10,7 +10,7 @@ var transporter = nodemailer.createTransport({
 
 var mailOptions = {
   from: process.env.nodemaileremail,
-  to: process.env.nodemailerrtestrecipient,
+  to: process.env.nodemailertestrecipient,
   subject: 'Sending Email using Node.js',
   text: 'That was easy!'
 };
@@ -22,3 +22,5 @@ transporter.sendMail(mailOptions, function(error, info){
     console.log('Email sent: ' + info.response);
   }
 }); 
+
+// node -r dotenv/config nodemailer.js to send an email
