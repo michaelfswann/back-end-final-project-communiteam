@@ -1,4 +1,5 @@
 const { query } = require('../config/index.js')
+const { getEventById } = require('../models/index')
 
 async function getAllTickets() {
     const result = await query('SELECT * FROM tickets_table ORDER BY id ASC')
@@ -18,6 +19,9 @@ async function bookTicket(info) {
         [info.event_id, info.attendee_id]
     )
     console.log(`a new ticket reserved`)
+
+    const dateOfEvent = getEventById(info.event_id)
+    console.log(dateOfEvent)
     return result.rows
 }
 
@@ -46,11 +50,28 @@ async function deleteTicketByAttendeeId(attendee_id) {
     return result.rows[0].attendee_id
 }
 
+/////////
+
+const sqlStatement = `
+                        SELECT email
+                        FROM accounts_table
+                        INNER JOIN tickets_table ON uid = attendee_id 
+                        WHERE event_id = $1
+                    `
+
+async function getTicketHolderEmail(eventid) {
+    const result = await query(sqlStatement, [eventid])
+    return result.rows
+}
+
+/////////////
+
 module.exports = {
     getAllTickets,
     bookTicket,
     deleteTicketById,
     countAllTicketsAtEventId,
     deleteTicketByEventId,
-    deleteTicketByAttendeeId
+    deleteTicketByAttendeeId,
+    getTicketHolderEmail
 }
