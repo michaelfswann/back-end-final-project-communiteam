@@ -6,11 +6,11 @@ https://dev.to/nedsoft/testing-nodejs-express-api-with-jest-and-supertest-1km6
 
 describe('Sample Test', () => {
     it('should test that true === true', () => {
-      expect(true).toBe(true)
+        expect(true).toBe(true)
     })
-  })
-  
-  // actual testing:
+})
+
+// actual testing:
 
 const supertest = require('supertest')
 const app = require('../server/app')
@@ -18,26 +18,40 @@ const app = require('../server/app')
 const request = supertest(app)
 
 describe('Get Endpoints', () => {
-  it('should return 200 on GET', async () => {
-    const res = await request
-      .get('/')
-    expect(res.statusCode).toEqual(200)
-
-
-    
-  })
+    it('should return 200 on GET', async () => {
+        const res = await request.get('/')
+        expect(res.statusCode).toEqual(200)
+    })
 })
 
-it('gets the test endpoint', async done => {
+it('gets the test endpoint', async (done) => {
     const response = await request.get('/events')
-  
-    expect(response.statusCode).toBe(200)
-    expect(response.body.payload).toStrictEqual(
-        [{"id":1,"title":"example css lecture","date":"2020-12-21T00:00:00.000Z","speaker":"Big Chris","banner":"https://i.redd.it/havo4cxljnuz.jpg","description":"Big Chris talks CSS one night only","numtickets":40,"location":"Zoom"},{"id":2,"title":"example css lecture","date":"2020-12-21T00:00:00.000Z","speaker":"Big Chris","banner":"https://i.redd.it/havo4cxljnuz.jpg","description":"Big Chris talks CSS one night only","numtickets":40,"location":"Zoom"}]
-    )
-    done()
-  })
 
+    expect(response.statusCode).toBe(200)
+    expect(response.body.payload).toStrictEqual([
+        {
+            id: 1,
+            title: 'example css lecture',
+            date: '2020-12-21T00:00:00.000Z',
+            speaker: 'Big Chris',
+            banner: 'https://i.redd.it/havo4cxljnuz.jpg',
+            description: 'Big Chris talks CSS one night only',
+            numtickets: 40,
+            location: 'Zoom'
+        },
+        {
+            id: 2,
+            title: 'example css lecture',
+            date: '2020-12-21T00:00:00.000Z',
+            speaker: 'Big Chris',
+            banner: 'https://i.redd.it/havo4cxljnuz.jpg',
+            description: 'Big Chris talks CSS one night only',
+            numtickets: 40,
+            location: 'Zoom'
+        }
+    ])
+    done()
+})
 
 /*
 example test:
