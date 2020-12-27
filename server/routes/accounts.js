@@ -1,5 +1,6 @@
 var express = require('express')
 var router = express.Router()
+var nodemailer = require('nodemailer')
 
 const {
     getAllAccounts,
@@ -24,6 +25,28 @@ router.post('/', async function (req, res, next) {
     const data = req.body
     const result = await addAccount(data)
     res.json({ success: true, payload: result })
+    var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: process.env.nodemaileremail,
+            pass: process.env.nodemailerpassword
+        }
+    })
+
+    var mailOptions = {
+        from: process.env.nodemaileremail,
+        to: data.email,
+        subject: 'Sending Email using Node.js',
+        text: 'That was easy!'
+    }
+
+    transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+            console.log(error)
+        } else {
+            console.log('Email sent: ' + info.response)
+        }
+    })
 })
 
 router.patch('/:uid', async function (req, res) {
