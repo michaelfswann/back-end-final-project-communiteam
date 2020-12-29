@@ -15,12 +15,12 @@ const checkJwt = jwt({
         cache: true,
         rateLimit: true,
         jwksRequestsPerMinute: 5,
-        jwksUri: `https://ecommerce-ducky.eu.auth0.com/.well-known/jwks.json`
+        jwksUri: `https://communiteam.eu.auth0.com/.well-known/jwks.json`
     }),
 
     // Validate the audience and the issuer.
     aud: 'http://localhost:3000/org',
-    issuer: `https://ecommerce-ducky.eu.auth0.com/`,
+    issuer: `https://communiteam.eu.auth0.com/`,
     algorithms: ['RS256']
 })
 

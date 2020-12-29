@@ -10,23 +10,20 @@ const {
     getAllEventsAfterCurrentDate
 } = require('../models/index')
 
-
-
 router.get('/', async function (req, res, next) {
     const events = await getAllEvents()
     res.json({ success: true, payload: events })
-})  
+})
 router.get('/date', async function (req, res, next) {
     const events = await getAllEventsAfterCurrentDate()
     res.json({ success: true, payload: events })
-}) 
+})
 
 router.get('/:id', async function (req, res, next) {
     const id = req.params.id
     const event = await getEventById(id)
     res.json({ success: true, payload: event })
 })
- 
 
 router.post('/', async function (req, res, next) {
     const data = req.body

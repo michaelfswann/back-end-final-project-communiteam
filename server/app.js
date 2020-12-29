@@ -21,7 +21,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 app.use(checkJwt)
 //app.use('/', indexRouter);
-app.use('/org', checkJwt, eventsRouter)
+app.use('/org', checkJwt, organiserRouter)
 app.use('/events', eventsRouter)
 
 app.use('/tickets', ticketsRouter)
