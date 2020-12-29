@@ -19,7 +19,7 @@ const checkJwt = jwt({
     }),
 
     // Validate the audience and the issuer.
-    audience: 'http://localhost:3000/',
+    aud: 'http://localhost:3000/org',
     issuer: `https://ecommerce-ducky.eu.auth0.com/`,
     algorithms: ['RS256']
 })
