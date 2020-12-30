@@ -9,7 +9,7 @@ const checkJwt = require('./middleware/check-jwt')
 var eventsRouter = require('./routes/events')
 var ticketsRouter = require('./routes/tickets')
 var accountsRouter = require('./routes/accounts')
-var organiserRouter = require('./routes/organiser')
+var organiserRouter = require('./routes/protected')
 
 var app = express()
 
@@ -21,7 +21,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 app.use(checkJwt)
 //app.use('/', indexRouter);
-app.use('/org', checkJwt, eventsRouter)
+app.use('/protected', checkJwt, eventsRouter)
 app.use('/events', eventsRouter)
 
 app.use('/tickets', ticketsRouter)
