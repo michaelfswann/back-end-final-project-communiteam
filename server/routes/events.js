@@ -8,7 +8,7 @@ const {
     updateEventById,
     deleteEventById,
     getAllEventsAfterCurrentDate
-} = require('../models')
+} = require('../models/index')
 
 router.get('/', async function (req, res, next) {
     const events = await getAllEvents()
