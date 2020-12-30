@@ -21,7 +21,7 @@ app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(cors())
 
-app.use(checkJwt)
+//app.use(checkJwt)
 //app.use('/', indexRouter);
 app.use('/protected', checkJwt, eventsRouter)
 app.use('/events', eventsRouter)
