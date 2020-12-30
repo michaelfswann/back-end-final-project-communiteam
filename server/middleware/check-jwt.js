@@ -24,4 +24,6 @@ const checkJwt = jwt({
     algorithms: ['RS256']
 })
 
+// todo: put jwksUri etc in .env
+
 module.exports = checkJwt
