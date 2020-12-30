@@ -1,12 +1,12 @@
-var nodemailer = require('nodemailer');
+var nodemailer = require('nodemailer')
 
 var transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.nodemaileremail,
-    pass: process.env.nodemailerpassword
-  }
-});
+    service: 'gmail',
+    auth: {
+        user: process.env.nodemaileremail,
+        pass: process.env.nodemailerpassword
+    }
+})
 
 var mailOptions = {
   from: process.env.nodemaileremail,
@@ -22,5 +22,3 @@ transporter.sendMail(mailOptions, function(error, info){
     console.log('Email sent: ' + info.response);
   }
 }); 
-
-// node -r dotenv/config nodemailer.js to send an email

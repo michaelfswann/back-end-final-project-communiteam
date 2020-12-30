@@ -7,7 +7,8 @@ const {
     deleteTicketById,
     countAllTicketsAtEventId,
     deleteTicketByEventId,
-    deleteTicketByAttendeeId
+    deleteTicketByAttendeeId,
+    getTicketHolderEmail
 } = require('../models/tickets')
 
 router.get('/', async function (req, res, next) {
@@ -17,6 +18,12 @@ router.get('/', async function (req, res, next) {
 router.get('/:id', async function (req, res, next) {
     const id = req.params.id
     const eventTickets = await countAllTicketsAtEventId(id)
+    res.json({ success: true, payload: eventTickets })
+})
+
+router.get('/emails/:eventid', async function (req, res, next) {
+    const eventid = req.params.eventid
+    const eventTickets = await getTicketHolderEmail(eventid)
     res.json({ success: true, payload: eventTickets })
 })
 
