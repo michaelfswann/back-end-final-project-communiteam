@@ -1,4 +1,4 @@
-const { query } = require('../../../config/index')
+const { query } = require('../../index')
 
 const sqlStatement = `CREATE TABLE IF NOT EXISTS tickets_table (
     id SERIAL PRIMARY KEY,

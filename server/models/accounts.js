@@ -1,4 +1,4 @@
-const { query } = require('../config/index.js')
+const { query } = require('../db/index.js')
 
 async function getAllAccounts() {
     const result = await query('SELECT * FROM accounts_table')

@@ -1,4 +1,4 @@
-const { query } = require('../../../config/index')
+const { query } = require('../../index')
 
 const sqlStatement =
     'INSERT INTO accounts_table (uid, email, is_volunteer) VALUES ($1, $2, $3) RETURNING uid;'

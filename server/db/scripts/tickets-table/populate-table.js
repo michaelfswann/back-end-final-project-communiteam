@@ -1,4 +1,4 @@
-const { query } = require('../../../config/index')
+const { query } = require('../../index')
 
 const sqlStatement = `INSERT INTO tickets_table (event_id, attendee_id) VALUES ($1, $2)`
 

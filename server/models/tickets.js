@@ -1,4 +1,4 @@
-const { query } = require('../config/index.js')
+const { query } = require('../db/index.js')
 const { getEventById } = require('../models/index')
 
 async function getAllTickets() {

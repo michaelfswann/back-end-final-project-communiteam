@@ -1,4 +1,4 @@
-const { query } = require('../config/index.js')
+const { query } = require('../db/index.js')
 
 async function getAllEvents() {
     const result = await query('SELECT * FROM event_table ORDER BY id ASC')

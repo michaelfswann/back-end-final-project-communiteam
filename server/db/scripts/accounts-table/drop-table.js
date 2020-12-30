@@ -1,4 +1,4 @@
-const { query } = require('../../../config/index')
+const { query } = require('../../index')
 
 const sqlStatement = `DROP TABLE IF EXISTS accounts_table`
 
