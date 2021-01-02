@@ -1,11 +1,22 @@
 var express = require('express')
 var router = express.Router()
 
-const { getAllEvents, addEvent, updateEventById } = require('../models/index')
+const {
+    getAllEvents,
+    addEvent,
+    updateEventById,
+    getEventById
+} = require('../models/index')
 
 router.get('/', async function (req, res, next) {
     const events = await getAllEvents()
     res.json({ success: true, payload: events })
+})
+
+router.get('/:id', async function (req, res, next) {
+    const id = req.params.id
+    const event = await getEventById(id)
+    res.json({ success: true, payload: event })
 })
 
 router.post('/', async function (req, res, next) {
