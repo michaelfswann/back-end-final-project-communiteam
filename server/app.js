@@ -37,22 +37,19 @@ app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
-app.use(checkJwt)
-app.use(checkPermissions)
-
-app.use('/protected', checkJwt, organiserRouter)
 app.use('/events', eventsRouter)
 app.use('/tickets', ticketsRouter)
 app.use('/accounts', accountsRouter)
+
+app.use(checkJwt)
+
+app.use('/protected', checkJwt, organiserRouter)
+
 app.use(
     '/role',
 
     checkJwt,
     checkPermissions,
-
-    () => {
-        console.log('hi')
-    },
     roleRouter
 )
 

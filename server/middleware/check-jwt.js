@@ -15,10 +15,14 @@ const checkJwt = jwt({
         cache: true,
         rateLimit: true,
         jwksRequestsPerMinute: 5,
-        jwksUri: 'https://dev-49ka9ni6.eu.auth0.com/.well-known/jwks.json'
+        jwksUri: `https://${process.env.AUTH0_DOMAIN}/.well-known/jwks.json`
     }),
-    aud: 'localhost:5000',
-    issuer: 'https://dev-49ka9ni6.eu.auth0.com/',
+
+    // THE AUD SHOULD BE AUDIENCE: 'LOCALHOST:5000'
+    /////////////<---VERY SUSPICIOUS!!!!
+
+    audience: process.env.AUTH0_AUDIENCE,
+    issuer: `https://${process.env.AUTH0_DOMAIN}/`,
     algorithms: ['RS256']
 })
 
