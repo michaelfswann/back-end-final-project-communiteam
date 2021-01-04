@@ -1,4 +1,4 @@
-var express = require('express')
+/*  var express = require('express')
 var router = express.Router()
 
 const {
@@ -8,7 +8,7 @@ const {
     countAllTicketsAtEventId,
     deleteTicketByEventId,
     deleteTicketByAttendeeId,
-    getTicketHolderEmail
+    //getTicketHolderEmail
 } = require('../models/tickets')
 
 router.get('/', async function (req, res, next) {
@@ -21,11 +21,11 @@ router.get('/:id', async function (req, res, next) {
     res.json({ success: true, payload: eventTickets })
 })
 
-router.get('/emails/:eventid', async function (req, res, next) {
+ router.get('/emails/:eventid', async function (req, res, next) {
     const eventid = req.params.eventid
     const eventTickets = await getTicketHolderEmail(eventid)
     res.json({ success: true, payload: eventTickets })
-})
+}) 
 
 router.post('/', async function (req, res, next) {
     const data = req.body
@@ -61,3 +61,4 @@ router.delete('/attendee/:id', async function (req, res) {
 })
 
 module.exports = router
+  */
