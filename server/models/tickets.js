@@ -28,7 +28,6 @@ async function getTicketHolderEmail(eventid) {
 }
  */
 
-
 async function countAllTicketsAtEventId(id) {
     const result = await query(
         'SELECT COUNT(event_id) FROM tickets_table WHERE event_id = $1',
@@ -37,15 +36,14 @@ async function countAllTicketsAtEventId(id) {
     return result.rows
 }
 
-async function bookTicket(info) {
+async function bookTicket(attendeeEmail, eventId) {
     const result = await query(
         `INSERT INTO tickets_table (event_id, attendee_email) VALUES ($1, $2)`,
-        [info.eventId, info.attendeeEmail]
+        [eventId, attendeeEmail]
     )
     console.log(`a new ticket reserved`)
     return result.rows
 }
-
 
 async function deleteTicketByEventId(event_id) {
     const result = await query(
@@ -55,15 +53,13 @@ async function deleteTicketByEventId(event_id) {
     console.log(result)
     return result.rows[0].event_id
 }
-async function deleteTicketByAttendeeEmail(attendeeEmail, eventId ) {
+async function deleteTicketByAttendeeEmail(attendeeEmail, eventId) {
     const result = await query(
-        `DELETE FROM tickets_table WHERE eventId = $1 AND attendee_email = $2`,
+        `DELETE FROM tickets_table WHERE event_id = $1 AND attendee_email = $2`,
         [eventId, attendeeEmail]
     )
     console.log(result)
 }
-
-
 
 module.exports = {
     //getAllTickets,
@@ -71,6 +67,6 @@ module.exports = {
     //deleteTicketById,
     countAllTicketsAtEventId,
     deleteTicketByEventId,
-    deleteTicketByAttendeeEmail,
+    deleteTicketByAttendeeEmail
     //getTicketHolderEmail
 }
