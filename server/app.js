@@ -8,9 +8,9 @@ const checkJwt = require('./middleware/check-jwt')
 
 //var indexRouter = require('./routes/index');
 var eventsRouter = require('./routes/events')
-var ticketsRouter = require('./routes/tickets')
-var accountsRouter = require('./routes/accounts')
-var organiserRouter = require('./routes/protected')
+//var ticketsRouter = require('./routes/tickets')
+//var accountsRouter = require('./routes/accounts')
+//var organiserRouter = require('./routes/protected')
 
 var app = express()
 
@@ -21,12 +21,12 @@ app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(cors())
 
-app.use(checkJwt)
+//app.use(checkJwt)
 //app.use('/', indexRouter);
 app.use('/protected', checkJwt, eventsRouter)
 app.use('/events', eventsRouter)
 
-app.use('/tickets', ticketsRouter)
-app.use('/accounts', accountsRouter)
+//app.use('/tickets', ticketsRouter)
+//app.use('/accounts', accountsRouter)
 
 module.exports = app
