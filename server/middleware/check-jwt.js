@@ -1,7 +1,6 @@
 const express = require('express')
 const app = express()
 const jwt = require('express-jwt')
-// const jwtAuthz = require('express-jwt-authz');
 const jwks = require('jwks-rsa')
 
 /* Authorization middleware. When used, the
@@ -18,14 +17,9 @@ const checkJwt = jwt({
         jwksUri: `https://${process.env.AUTH0_DOMAIN}/.well-known/jwks.json`
     }),
 
-    // THE AUD SHOULD BE AUDIENCE: 'LOCALHOST:5000'
-    /////////////<---VERY SUSPICIOUS!!!!
-
     audience: process.env.AUTH0_AUDIENCE,
     issuer: `https://${process.env.AUTH0_DOMAIN}/`,
     algorithms: ['RS256']
 })
-
-// todo: put jwksUri etc in .env
 
 module.exports = checkJwt

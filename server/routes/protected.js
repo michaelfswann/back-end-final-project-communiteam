@@ -6,7 +6,7 @@ const {
     addEvent,
     updateEventById,
     getEventById
-} = require('../models/index')
+} = require('../models/events')
 
 router.get('/', async function (req, res, next) {
     const events = await getAllEvents()
