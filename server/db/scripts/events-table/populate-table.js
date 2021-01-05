@@ -1,12 +1,13 @@
 const { query } = require('../../index')
 
 const sqlStatement =
-    'INSERT INTO event_table (title, date, speaker, banner, description, numtickets, location) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING title;'
+    'INSERT INTO event_table (title, date, time, speaker, banner, description, numtickets, location) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING title;'
 
 async function addEvent(event) {
     const res = await query(sqlStatement, [
         event.title,
         event.date,
+        event.time,
         event.speaker,
         event.banner,
         event.description,
@@ -20,6 +21,7 @@ async function addEvent(event) {
 const eventData = {
     title: 'example css lecture',
     date: '2020-12-21',
+    time: '19:00:00',
     speaker: 'Big Chris',
     banner: 'https://i.redd.it/havo4cxljnuz.jpg',
     description: 'Big Chris talks CSS one night only',

@@ -1,7 +1,7 @@
 const { query } = require('../../index')
 
 const sqlStatement = `CREATE TABLE IF NOT EXISTS event_table (
-    id SERIAL PRIMARY KEY, title TEXT, date DATE, speaker TEXT, banner TEXT, description TEXT, numtickets INT, location TEXT
+    id SERIAL PRIMARY KEY, title TEXT, date DATE, time Time, speaker TEXT, banner TEXT, description TEXT, numtickets INT, location TEXT
     )`
 
 async function createEventTable() {
