@@ -4,33 +4,37 @@ var router = express.Router()
 const {
     getAllEvents,
     getEventById,
-    addEvent,
-    updateEventById,
-    deleteEventById,
     getAllEventsAfterCurrentDate
 } = require('../models/events')
 
-const {
-    bookTicket,
-    countAllTicketsAtEventId,
-    deleteTicketsByEventId,
-    deleteTicketByAttendeeEmail
-} = require('../models/tickets')
+const { countAllTicketsAtEventId } = require('../models/tickets')
+
+const { convertDateFormat } = require('../../edit-date.js')
 
 router.get('/', async function (req, res, next) {
     const events = await getAllEvents()
-    res.json({ success: true, payload: events })
+    events.forEach((e) => (e.date = convertDateFormat(e.date)))
+    console.log(events)
+    res.json({
+        success: true,
+        payload: events
+    })
 })
 router.get('/date', async function (req, res, next) {
     const events = await getAllEventsAfterCurrentDate()
+    events.forEach((e) => (e.date = convertDateFormat(e.date)))
     res.json({ success: true, payload: events })
 })
 
 router.get('/:id', async function (req, res, next) {
     const id = req.params.id
     const event = await getEventById(id)
+    event.date = convertDateFormat(event.date)
     res.json({ success: true, payload: event })
 })
+
+/*
+ADDED TO org.js - NEEDS PERMISSIONS FOR CREATING, UPDATING AND DELETING EVENTS
 
 router.post('/', async function (req, res, next) {
     const data = req.body
@@ -62,6 +66,7 @@ router.delete('/:id', async function (req, res) {
         payload: `Event with id of ${id} has been deleted.`
     })
 })
+*/
 
 /* -----------------------------------------------------------------------------------------------------------------------------------------------------
     Tickets Routes
@@ -74,12 +79,19 @@ router.get('/:id/tickets', async function (req, res, next) {
     res.json({ success: true, payload: eventTickets })
 })
 
+/*
+ADDED TO protected.js - NEED SIGN-IN FOR EVENT REGISTRATION
+
 router.post('/:id/tickets', async function (req, res, next) {
     const { attendeeEmail } = req.body
     const eventId = req.params.id
     const result = await bookTicket(attendeeEmail, eventId)
     res.json({ success: true, payload: result })
 })
+*/
+
+/*
+ADDED TO org.js - NEED PERMISSIONS FOR DELETING TICKETS
 
 router.delete('/:id/tickets', async function (req, res) {
     const eventId = req.params.id
@@ -98,5 +110,6 @@ router.delete('/:id/tickets/unregister', async function (req, res) {
         success: true
     })
 })
+*/
 
 module.exports = router
