@@ -7,7 +7,7 @@ async function getAllEvents() {
 
 async function getEventById(id) {
     const result = await query('SELECT * FROM event_table WHERE id = $1;', [id])
-    return result.rows
+    return result.rows[0]
 }
 
 async function addEvent(event) {
