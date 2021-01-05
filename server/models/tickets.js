@@ -33,7 +33,7 @@ async function countAllTicketsAtEventId(id) {
         'SELECT COUNT(event_id) FROM tickets_table WHERE event_id = $1',
         [id]
     )
-    return result.rows
+    return result.rows[0]
 }
 
 async function bookTicket(attendeeEmail, eventId) {
@@ -41,24 +41,24 @@ async function bookTicket(attendeeEmail, eventId) {
         `INSERT INTO tickets_table (event_id, attendee_email) VALUES ($1, $2)`,
         [eventId, attendeeEmail]
     )
-    console.log(`a new ticket reserved`)
-    return result.rows
+    console.log(result)
+    return result.rows[0]
 }
 
-async function deleteTicketByEventId(event_id) {
+async function deleteTicketsByEventId(eventId) {
     const result = await query(
         `DELETE FROM tickets_table WHERE event_id = $1 RETURNING event_id`,
-        [event_id]
+        [eventId]
     )
     console.log(result)
     return result.rows[0].event_id
 }
 async function deleteTicketByAttendeeEmail(attendeeEmail, eventId) {
-    const result = await query(
+    await query(
         `DELETE FROM tickets_table WHERE event_id = $1 AND attendee_email = $2`,
         [eventId, attendeeEmail]
     )
-    console.log(result)
+    console.log(`Event with id ${eventId} deleted.`)
 }
 
 module.exports = {
@@ -66,7 +66,7 @@ module.exports = {
     bookTicket,
     //deleteTicketById,
     countAllTicketsAtEventId,
-    deleteTicketByEventId,
+    deleteTicketsByEventId,
     deleteTicketByAttendeeEmail
     //getTicketHolderEmail
 }

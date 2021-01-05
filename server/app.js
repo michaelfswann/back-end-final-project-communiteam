@@ -14,7 +14,7 @@ const eventsRouter = require('./routes/events')
 // accounts route not in use
 // const accountsRouter = require('./routes/accounts')
 const organiserRouter = require('./routes/protected')
-const roleRouter = require('./routes/role')
+const orgRouter = require('./routes/org')
 
 const app = express()
 
@@ -37,6 +37,6 @@ app.use('/events', eventsRouter)
 app.use(checkJwt)
 
 app.use('/protected', checkJwt, organiserRouter)
-app.use('/role', checkJwt, checkPermissions, roleRouter)
+app.use('/org', checkJwt, checkPermissions, orgRouter)
 
 module.exports = app

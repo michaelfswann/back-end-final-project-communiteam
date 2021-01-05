@@ -13,7 +13,7 @@ const {
 const {
     bookTicket,
     countAllTicketsAtEventId,
-    deleteTicketByEventId,
+    deleteTicketsByEventId,
     deleteTicketByAttendeeEmail
 } = require('../models/tickets')
 
@@ -81,8 +81,16 @@ router.post('/:id/tickets', async function (req, res, next) {
     res.json({ success: true, payload: result })
 })
 
-//double check - there might be a different way using query param.
 router.delete('/:id/tickets', async function (req, res) {
+    const eventId = req.params.id
+    await deleteTicketsByEventId(eventId)
+    res.json({
+        success: true
+    })
+})
+
+//double check - there might be a different way using query param.
+router.delete('/:id/tickets/unregister', async function (req, res) {
     const eventId = req.params.id
     const { attendeeEmail } = req.body
     await deleteTicketByAttendeeEmail(attendeeEmail, eventId)
