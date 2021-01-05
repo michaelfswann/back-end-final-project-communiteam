@@ -1,4 +1,4 @@
-const exampleDAte = '2021-12-24T00:00:00.000Z'
+const exampleDate = '2021-12-24T00:00:00.000Z'
 
 function convertDateFormat(input) {
     const splitDate = input.split('')
@@ -14,4 +14,4 @@ function convertDateFormat(input) {
     console.log(joinedDate)
 }
 
-convertDateFormat(exampleDAte)
+convertDateFormat(exampleDate)
