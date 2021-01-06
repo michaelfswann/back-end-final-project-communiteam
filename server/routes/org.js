@@ -27,12 +27,11 @@ router.get('/', async function (req, res, next) {
 
 /* EVENT ROUTES */
 
-/* router.post('/', function (req, res, next) {
-        const data = req.body
-        const result = await addEvent(data)
-        res.json({ success: true, payload: result }) 
-
-}) */
+router.post('/listing', async function (req, res, next) {
+    const data = req.body
+    const result = await addEvent(data)
+    res.json({ success: true, payload: result })
+})
 
 /*-------------------------------------------------------Cloudinary config ----------------------*/
 
@@ -42,17 +41,13 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_SECRET
 })
 
-router.post('/', async function (req, res, next) {
-        const fileStr = req.body.banner
-        const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
-            upload_preset: 'event_setups'
-        })
-        console.log(uploadedResponse.url)
-       
-
-    /* const data = req.body
-    const result = await addEvent(data)
-    res.json({ success: true, payload: result })  */
+router.post('/banner', async function (req, res, next) {
+    const fileStr = req.body.banner
+    const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
+        upload_preset: 'event_setups'
+    })
+    console.log(uploadedResponse.url)
+    res.json(uploadedResponse)
 })
 
 /* try { res.json({ msg: 'Victory' })
