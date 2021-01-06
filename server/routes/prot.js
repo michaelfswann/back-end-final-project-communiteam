@@ -1,5 +1,11 @@
-var express = require('express')
-var router = express.Router()
+const express = require('express')
+const router = express.Router()
+
+const emailAddress = process.env.EMAIL_ADDRESS
+
+const { convertDateFormat } = require('../models/edit-date')
+
+const { newTicketEmail } = require('../models/nodemailer')
 
 const {
     getAllEvents,
@@ -50,6 +56,9 @@ router.post('/:id/tickets', async function (req, res, next) {
     const { attendeeEmail } = req.body
     const eventId = req.params.id
     const result = await bookTicket(attendeeEmail, eventId)
+    const event = await getEventById(eventId)
+    event.date = convertDateFormat(event.date)
+    newTicketEmail(attendeeEmail, event)
     res.json({ success: true, payload: result })
 })
 

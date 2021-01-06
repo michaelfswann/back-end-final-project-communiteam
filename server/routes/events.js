@@ -9,7 +9,7 @@ const {
 
 const { countAllTicketsAtEventId } = require('../models/tickets')
 
-const { convertDateFormat } = require('../../edit-date.js')
+const { convertDateFormat } = require('../models/edit-date.js')
 
 router.get('/', async function (req, res, next) {
     const events = await getAllEvents()

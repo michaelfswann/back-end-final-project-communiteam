@@ -10,20 +10,29 @@ const transporter = nodemailer.createTransport({
         pass: emailPassword
     }
 })
-
+/* 
 var mailOptions = {
     from: emailAddress,
     to: emailAddress,
     subject: 'Sending Email using Node.js',
     text: 'That was easy!'
 }
+ */
 
-transporter.sendMail(mailOptions, function (error, info) {
-    if (error) {
-        console.log(error)
-    } else {
-        console.log('Email sent: ' + info.response)
+function newTicketEmail(attendeeEmail, event) {
+    const mailOptions = {
+        from: emailAddress,
+        to: attendeeEmail,
+        subject: `Your ticket for ${event.title}`,
+        text: `You have booked a ticket for ${event.title} on ${event.date} at ${event.time}`
     }
-})
+    transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+            console.log(error)
+        } else {
+            console.log('Email sent: ' + info.response)
+        }
+    })
+}
 
-module.exports = transporter
+module.exports = { newTicketEmail }

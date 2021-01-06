@@ -38,10 +38,10 @@ async function countAllTicketsAtEventId(id) {
 
 async function bookTicket(attendeeEmail, eventId) {
     const result = await query(
-        `INSERT INTO tickets_table (event_id, attendee_email) VALUES ($1, $2)`,
+        `INSERT INTO tickets_table (event_id, attendee_email) VALUES ($1, $2) RETURNING id`,
         [eventId, attendeeEmail]
     )
-    console.log(result)
+    // console.log(result)
     return result.rows[0]
 }
 
