@@ -7,6 +7,7 @@ const eventData = [
         id: '1',
         title: 'example css lecture',
         date: '2020-12-21',
+        TIME: '19:00:00',
         speaker: 'Big Chris',
         banner: 'https://i.redd.it/havo4cxljnuz.jpg',
         description: 'Big Chris talks CSS one night only',
