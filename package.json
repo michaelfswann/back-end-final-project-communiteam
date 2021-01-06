@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node ./server/bin/www",
     "dev": "nodemon -r dotenv/config ./server/bin/www",
-    "test": "jest --setupFiles dotenv/config --detectOpenHandles",
+    "reset-db": "bash ./server/db/testing.sh",
+    "test": "jest --setupFiles --detectOpenHandles",
     "create-events-table": "node -r dotenv/config ./server/db/scripts/events-table/create-table.js",
     "drop-events-table": "node -r dotenv/config ./server/db/scripts/events-table/drop-table.js",
     "populate-events-table": "node -r dotenv/config ./server/db/scripts/events-table/populate-table.js",
@@ -19,6 +20,7 @@
   "dependencies": {
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
+    "custom-env": "^2.0.1",
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",
     "express": "~4.16.1",

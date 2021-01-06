@@ -1,3 +1,5 @@
+require('custom-env').env('testing')
+
 const { query } = require('../../../test-index')
 
 const sqlStatement = `DROP TABLE IF EXISTS event_table`

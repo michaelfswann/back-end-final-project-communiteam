@@ -3,6 +3,7 @@
 /**
  * Module dependencies.
  */
+require('custom-env').env('testing')
 
 var app = require('../app.js')
 var debug = require('debug')('back-end-final-project-communiteam:server')
