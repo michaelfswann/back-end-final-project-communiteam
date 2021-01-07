@@ -62,9 +62,9 @@ router.get('/tickets', async function (req, res) {
     res.json({ success: true, payload: tickets })
 })
 
-router.get('/tickets/email', async function (req, res) {
-    const { attendeeEmail } = req.body
-    const tickets = await getTicketsByAttendeeEmail(attendeeEmail)
+router.get('/tickets/:email', async function (req, res) {
+    const email = req.params.email
+    const tickets = await getTicketsByAttendeeEmail(email)
     res.json({ success: true, payload: tickets })
 })
 
