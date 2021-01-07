@@ -17,6 +17,7 @@
     "populate-accounts-table": "node -r dotenv/config ./server/db/scripts/accounts-table/populate-table.js"
   },
   "dependencies": {
+    "cloudinary": "^1.23.0",
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
     "debug": "~2.6.9",

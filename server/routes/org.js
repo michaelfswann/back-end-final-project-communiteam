@@ -12,6 +12,8 @@ const {
     deleteTicketsByEventId
 } = require('../models/tickets.js')
 
+const { getCloudinaryUrl } = require('../models/cloudinary')
+
 const getRoleMessage = () => {
     return {
         message:
@@ -28,13 +30,18 @@ router.get('/', async function (req, res, next) {
 
 router.post('/', async function (req, res, next) {
     const data = req.body
-    const result = await addEvent(data)
+    const bannerUrl = await getCloudinaryUrl(req.body.banner)
+    const d = { ...data, banner: bannerUrl }
+    const result = await addEvent(d)
     res.json({ success: true, payload: result })
 })
 
 router.patch('/:id', async function (req, res) {
     const id = req.params.id
     const details = req.body
+    if (details?.banner !== undefined) {
+        details.banner = await getCloudinaryUrl(details.banner)
+    }
     const result = await updateEventById(id, details)
     res.json({
         success: true,
