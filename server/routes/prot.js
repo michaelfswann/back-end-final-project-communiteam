@@ -14,7 +14,12 @@ const {
     getEventById
 } = require('../models/events')
 
-const { bookTicket, deleteTicketByAttendeeEmail } = require('../models/tickets')
+const {
+    getAllTickets,
+    bookTicket,
+    deleteTicketByAttendeeEmail,
+    getTicketsByAttendeeEmail
+} = require('../models/tickets')
 
 // router.get('/', async function (req, res, next) {
 //     const events = await getAllEvents()
@@ -51,6 +56,17 @@ router.get('/', async function (req, res, next) {
 })
 
 /* TICKETS ROUTES */
+
+router.get('/tickets', async function (req, res) {
+    const tickets = await getAllTickets()
+    res.json({ success: true, payload: tickets })
+})
+
+router.get('/tickets/email', async function (req, res) {
+    const { attendeeEmail } = req.body
+    const tickets = await getTicketsByAttendeeEmail(attendeeEmail)
+    res.json({ success: true, payload: tickets })
+})
 
 router.post('/:id/tickets', async function (req, res, next) {
     const { attendeeEmail } = req.body
