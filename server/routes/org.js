@@ -1,6 +1,5 @@
 var express = require('express')
 var router = express.Router()
-const cloudinary = require('cloudinary').v2
 
 const {
     addEvent,
@@ -12,6 +11,8 @@ const {
     countAllTicketsAtEventId,
     deleteTicketsByEventId
 } = require('../models/tickets.js')
+
+const { getCloudinaryUrl } = require('../models/cloudinary')
 
 const getRoleMessage = () => {
     return {
@@ -27,39 +28,20 @@ router.get('/', async function (req, res, next) {
 
 /* EVENT ROUTES */
 
-router.post('/listing', async function (req, res, next) {
+router.post('/', async function (req, res, next) {
     const data = req.body
-    const result = await addEvent(data)
+    const bannerUrl = await getCloudinaryUrl(req.body.banner)
+    const d = { ...data, banner: bannerUrl }
+    const result = await addEvent(d)
     res.json({ success: true, payload: result })
 })
-
-/*-------------------------------------------------------Cloudinary config ----------------------*/
-
-cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_NAME,
-    api_key: process.env.CLOUDINARY_KEY,
-    api_secret: process.env.CLOUDINARY_SECRET
-})
-
-router.post('/banner', async function (req, res, next) {
-    const fileStr = req.body.banner
-    const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
-        upload_preset: 'event_setups'
-    })
-    console.log(uploadedResponse.url)
-    res.json(uploadedResponse)
-})
-
-/* try { res.json({ msg: 'Victory' })
-} catch (error) {
-    console.log(error)
-    res.status(500).json({ err: 'Something went wrong' })
-} */
-/*--------------------------------------------------------------------------------------------------------------------*/
 
 router.patch('/:id', async function (req, res) {
     const id = req.params.id
     const details = req.body
+    if (details?.banner !== undefined) {
+        details.banner = await getCloudinaryUrl(details.banner)
+    }
     const result = await updateEventById(id, details)
     res.json({
         success: true,
