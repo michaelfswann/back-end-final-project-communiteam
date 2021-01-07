@@ -77,7 +77,7 @@ async function deleteEventById(id) {
 
 async function getAllEventsAfterCurrentDate() {
     const result = await query(
-        'SELECT * FROM event_table WHERE date >= CURRENT_DATE'
+        'SELECT * FROM event_table WHERE date >= CURRENT_DATE AND time >= CURRENT_TIME'
     )
     return result.rows
 }
