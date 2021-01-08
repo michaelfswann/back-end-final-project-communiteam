@@ -39,7 +39,7 @@ router.post('/', async function (req, res, next) {
 router.patch('/:id', async function (req, res) {
     const id = req.params.id
     const details = req.body
-    if (details?.banner !== undefined) {
+    if (details.banner !== undefined) {
         details.banner = await getCloudinaryUrl(details.banner)
     }
     const result = await updateEventById(id, details)
