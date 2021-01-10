@@ -11,9 +11,39 @@ async function bookTicket(info) {
     return result.rows
 }
 
-const ticketsData = {
-    event_id: 1,
-    attendee_email: 'michael@mail'
-}
+const ticketsData = [
+    {
+        event_id: 1,
+        attendee_email: 'mikeswann@mail.com'
+    },
+    {
+        event_id: 2,
+        attendee_email: 'fadumo.ahmed.aideed@gmail.com'
+    },
+    {
+        event_id: 3,
+        attendee_email: 'vmilitaru28@gmail.com'
+    },
+    {
+        event_id: 4,
+        attendee_email: 'ameliacollinspatel@gmail.com'
+    },
+    {
+        event_id: 5,
+        attendee_email: 'tomnbennett2013@gmail.com'
+    },
+    {
+        event_id: 6,
+        attendee_email: 'soc.communiteam@gmail.com'
+    },
+    {
+        event_id: 7,
+        attendee_email: 'soc.communiteam@gmail.com'
+    },
+    {
+        event_id: 8,
+        attendee_email: 'soc.communiteam@gmail.com'
+    }
+]
 
-bookTicket(ticketsData)
+ticketsData.map(bookTicket)
