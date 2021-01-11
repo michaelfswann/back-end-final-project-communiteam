@@ -101,8 +101,6 @@ async function getAllEventsAfterCurrentDate() {
     return upcomingEvents
 }
 
-getAllEventsAfterCurrentDate()
-
 module.exports = {
     getAllEvents,
     getEventById,
