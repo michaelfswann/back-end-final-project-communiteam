@@ -1,4 +1,5 @@
 const { query } = require('../db/index.js')
+const { convertDateFormat } = require('./edit-date')
 
 async function getAllEvents() {
     const result = await query('SELECT * FROM event_table ORDER BY id ASC')
@@ -77,10 +78,30 @@ async function deleteEventById(id) {
 
 async function getAllEventsAfterCurrentDate() {
     const result = await query(
-        'SELECT * FROM event_table WHERE date >= CURRENT_DATE AND time >= CURRENT_TIME'
+        'SELECT * FROM event_table WHERE date >= CURRENT_DATE ORDER BY date ASC'
     )
-    return result.rows
+    const orderedEvents = result.rows.sort((a, b) => {
+        if (a.date > b.date) {
+            return 0
+        }
+        if (a.time < b.time) {
+            return -1
+        }
+        return 1
+    })
+
+    const i = orderedEvents.findIndex((e) => {
+        const dateString = convertDateFormat(e.date)
+        const d = new Date(`${dateString}T${e.time}Z`)
+        return d > Date.now()
+    })
+
+    const upcomingEvents = orderedEvents.slice(i)
+
+    return upcomingEvents
 }
+
+getAllEventsAfterCurrentDate()
 
 module.exports = {
     getAllEvents,
