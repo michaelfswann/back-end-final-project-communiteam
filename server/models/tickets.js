@@ -1,9 +1,19 @@
 const { query } = require('../db/index.js')
 
-/* async function getAllTickets() {
+async function getAllTickets() {
     const result = await query('SELECT * FROM tickets_table ORDER BY id ASC')
     return result.rows
 }
+
+async function getTicketsByAttendeeEmail(email) {
+    const result = await query(
+        `SELECT * FROM tickets_table WHERE attendee_email = $1`,
+        [email]
+    )
+    return result.rows
+}
+
+/*
 
 async function deleteTicketById(id) {
     const result = await query(
@@ -62,11 +72,12 @@ async function deleteTicketByAttendeeEmail(attendeeEmail, eventId) {
 }
 
 module.exports = {
-    //getAllTickets,
+    getAllTickets,
     bookTicket,
     //deleteTicketById,
     countAllTicketsAtEventId,
     deleteTicketsByEventId,
-    deleteTicketByAttendeeEmail
+    deleteTicketByAttendeeEmail,
+    getTicketsByAttendeeEmail
     //getTicketHolderEmail
 }
