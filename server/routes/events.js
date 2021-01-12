@@ -28,45 +28,13 @@ router.get('/date', async function (req, res, next) {
 
 router.get('/:id', async function (req, res, next) {
     const id = req.params.id
+    const numberOfTickets = await countAllTicketsAtEventId(id)
     const event = await getEventById(id)
-    event.date = convertDateFormat(event.date)
-    res.json({ success: true, payload: event })
-})
-
-/*
-ADDED TO org.js - NEEDS PERMISSIONS FOR CREATING, UPDATING AND DELETING EVENTS
-
-router.post('/', async function (req, res, next) {
-    const data = req.body
-    const result = await addEvent(data)
-    res.json({ success: true, payload: result })
-})
-
-router.patch('/:id', async function (req, res) {
-    const id = req.params.id
-    const details = req.body
-    const result = await updateEventById(id, details)
-    console.log(result)
     res.json({
         success: true,
-        payload: `Event with id ${result.id} has been updated.`
+        payload: { event: event, numTickets: numberOfTickets }
     })
 })
-
-router.delete('/:id', async function (req, res) {
-    const eventId = req.params.id
-    const eventTickets = await countAllTicketsAtEventId(eventId)
-    console.log(eventTickets)
-    if (eventTickets.count > 0) {
-        await deleteTicketByEventId(eventId)
-    }
-    const { id } = await deleteEventById(eventId)
-    res.json({
-        success: true,
-        payload: `Event with id of ${id} has been deleted.`
-    })
-})
-*/
 
 /* -----------------------------------------------------------------------------------------------------------------------------------------------------
     Tickets Routes
