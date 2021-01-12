@@ -18,7 +18,7 @@ const {
     getAllTickets,
     bookTicket,
     deleteTicketByAttendeeEmail,
-    getTicketsByAttendeeEmail
+    getAllTicketsByAttendeeEmail
 } = require('../models/tickets')
 
 // router.get('/', async function (req, res, next) {
@@ -58,13 +58,13 @@ router.get('/', async function (req, res, next) {
 /* TICKETS ROUTES */
 
 router.get('/tickets', async function (req, res) {
-    const tickets = await getAllTickets()
-    res.json({ success: true, payload: tickets })
-})
-
-router.get('/tickets/:email', async function (req, res) {
-    const email = req.params.email
-    const tickets = await getTicketsByAttendeeEmail(email)
+    let tickets
+    if (req.query.email) {
+        tickets = await getAllTicketsByAttendeeEmail(req.query.email)
+        tickets.forEach((e) => (e.date = convertDateFormat(e.date)))
+    } else {
+        tickets = await getAllTickets()
+    }
     res.json({ success: true, payload: tickets })
 })
 

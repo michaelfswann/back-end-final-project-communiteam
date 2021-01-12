@@ -5,38 +5,25 @@ async function getAllTickets() {
     return result.rows
 }
 
-async function getTicketsByAttendeeEmail(email) {
+async function getAllTicketsByEventId(id) {
     const result = await query(
-        `SELECT * FROM tickets_table WHERE attendee_email = $1`,
+        'SELECT * FROM tickets_table WHERE event_id = $1 ORDER BY id ASC',
+        [id]
+    )
+    return result.rows
+}
+
+async function getAllTicketsByAttendeeEmail(email) {
+    const result = await query(
+        `SELECT * FROM tickets_table
+        INNER JOIN event_table ON event_id = event_table.id
+        WHERE attendee_email = $1`,
         [email]
     )
     return result.rows
 }
 
-/*
-
-async function deleteTicketById(id) {
-    const result = await query(
-        `DELETE FROM tickets_table WHERE id = $1 RETURNING id`,
-        [id]
-    )
-    console.log(result)
-    return result.rows[0]
-}
-
-
- const sqlStatement = `
-                        SELECT email
-                        FROM accounts_table
-                        INNER JOIN tickets_table ON uid = attendee_id 
-                        WHERE event_id = $1
-                    `
-
-async function getTicketHolderEmail(eventid) {
-    const result = await query(sqlStatement, [eventid])
-    return result.rows
-}
- */
+getAllTicketsByAttendeeEmail('tomnbennett2013@gmail.com')
 
 async function countAllTicketsAtEventId(id) {
     const result = await query(
@@ -48,10 +35,13 @@ async function countAllTicketsAtEventId(id) {
 
 async function bookTicket(attendeeEmail, eventId) {
     const result = await query(
-        `INSERT INTO tickets_table (event_id, attendee_email) VALUES ($1, $2) RETURNING id`,
+        `INSERT INTO tickets_table (event_id, attendee_email)
+            SELECT $1, $2
+        WHERE NOT EXISTS (
+            SELECT 1 FROM tickets_table WHERE event_id = $1 AND attendee_email = $2
+        )`,
         [eventId, attendeeEmail]
     )
-    // console.log(result)
     return result.rows[0]
 }
 
@@ -73,11 +63,12 @@ async function deleteTicketByAttendeeEmail(attendeeEmail, eventId) {
 
 module.exports = {
     getAllTickets,
+    getAllTicketsByEventId,
     bookTicket,
     //deleteTicketById,
     countAllTicketsAtEventId,
     deleteTicketsByEventId,
     deleteTicketByAttendeeEmail,
-    getTicketsByAttendeeEmail
+    getAllTicketsByAttendeeEmail
     //getTicketHolderEmail
 }
