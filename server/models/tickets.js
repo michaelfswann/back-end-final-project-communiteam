@@ -23,8 +23,6 @@ async function getAllTicketsByAttendeeEmail(email) {
     return result.rows
 }
 
-getAllTicketsByAttendeeEmail('tomnbennett2013@gmail.com')
-
 async function countAllTicketsAtEventId(id) {
     const result = await query(
         'SELECT COUNT(event_id) FROM tickets_table WHERE event_id = $1',

@@ -32,12 +32,12 @@ router.get('/date', async function (req, res, next) {
 
 router.get('/:id', async function (req, res, next) {
     const id = req.params.id
-    const numberOfTickets = await countAllTicketsAtEventId(id)
+    const ticketCount = await countAllTicketsAtEventId(id)
     const event = await getEventById(id)
     event.date = convertDateFormat(event.date)
     res.json({
         success: true,
-        payload: { event: event, numTickets: numberOfTickets }
+        payload: { event, ticketCount }
     })
 })
 
