@@ -22,7 +22,7 @@ const eventData = [
     {
         title: 'Styling It Out',
         date: '2021-12-21',
-        time: '19:00:00',
+        time: '19:00',
         speaker: 'Bootcampers 4.0',
         banner:
             'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/CSS3_logo_and_wordmark.svg/120px-CSS3_logo_and_wordmark.svg.png',
@@ -33,7 +33,7 @@ const eventData = [
     {
         title: 'A question of organisation',
         date: '2021-06-30',
-        time: '19:00:00',
+        time: '19:00',
         speaker: 'Tom Bennet',
         banner:
             'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReFppENYarhUQF32WCOctpAXZvDm4zJSJElg&usqp=CAU',
@@ -45,7 +45,7 @@ const eventData = [
     {
         title: "Valentina's Auth0 Masterclass",
         date: '2021-04-21',
-        time: '19:30:00',
+        time: '19:30',
         speaker: 'Valentina Militaru',
         banner: 'https://cdn.auth0.com/blog/series-c/auth0-logo.png',
         description:
@@ -56,7 +56,7 @@ const eventData = [
     {
         title: 'Next.js Hype',
         date: '2023-02-13',
-        time: '20:00:00',
+        time: '20:00',
         speaker: 'Barry Scott',
         banner: 'https://miro.medium.com/max/650/1*Hva7hcsFWulFUPhrEWui1A.jpeg',
         description:
@@ -67,7 +67,7 @@ const eventData = [
     {
         title: 'RESTful or Stressful',
         date: '2023-04-17',
-        time: '19:30:00',
+        time: '19:30',
         speaker: 'Roy Fielding',
         banner:
             'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSU9Y_hsyTH32-gVSaTWwZuttmiHIi612T9Rg&usqp=CAU',
@@ -79,7 +79,7 @@ const eventData = [
     {
         title: 'Agile Methodologies',
         date: '2023-06-30',
-        time: '19:00:00',
+        time: '19:00',
         speaker: 'Bootcampers 4.0',
         banner:
             'https://d57439wlqx3vo.cloudfront.net/iblock/276/276b271f4c6ac56cbf918c9735d91e4f/149341c8d1f98eaf0fe081b1f255c8c1.jpg',
@@ -91,7 +91,7 @@ const eventData = [
     {
         title: 'Git: unpleasant person or stupid content tracker',
         date: '2023-04-17',
-        time: '19:30:00',
+        time: '19:30',
         speaker: 'Linus Torvald',
         banner:
             'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Git-logo.svg/512px-Git-logo.svg.png',
@@ -103,7 +103,7 @@ const eventData = [
     {
         title: "Amelia's event party",
         date: '2021-01-21',
-        time: '22:45:00',
+        time: '22:45',
         speaker: 'Amelia, Tom, Fadumo',
         banner:
             'http://res.cloudinary.com/duhcbwxmg/image/upload/v1610120255/event_setups/nu35ua9qfyhmaxbcrmp9.jpg',

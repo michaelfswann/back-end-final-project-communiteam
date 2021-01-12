@@ -5,11 +5,11 @@ const { convertDateFormat } = require('./edit-date')
 
     {
         id: '1',
-        title: 'example css lecture',
+        title: 'Web Accessibility',
         date: '2020-12-21',
-        speaker: 'Big Chris',
+        speaker: 'Bruce Lawson',
         banner: 'https://i.redd.it/havo4cxljnuz.jpg',
-        description: 'Big Chris talks CSS one night only',
+        description: 'Watch one of HTML5's contributors give a talk on making the web more accessible for those who require other technologies to help them browse.',
         numtickets: '40',
         location: 'Zoom'
     }
