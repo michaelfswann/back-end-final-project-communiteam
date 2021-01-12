@@ -1,6 +1,21 @@
 const { query } = require('../db/index.js')
 const { convertDateFormat } = require('./edit-date')
 
+/* EXAMPLE DATA
+
+    {
+        id: '1',
+        title: 'example css lecture',
+        date: '2020-12-21',
+        speaker: 'Big Chris',
+        banner: 'https://i.redd.it/havo4cxljnuz.jpg',
+        description: 'Big Chris talks CSS one night only',
+        numtickets: '40',
+        location: 'Zoom'
+    }
+
+*/
+
 async function getAllEvents() {
     const result = await query('SELECT * FROM event_table ORDER BY id ASC')
     return result.rows
