@@ -1,81 +1,72 @@
-const express = require('express')
-const router = express.Router()
-
-const emailAddress = process.env.EMAIL_ADDRESS
-
-const { convertDateFormat } = require('../models/edit-date')
-
-const { newTicketEmail } = require('../models/nodemailer')
+var express = require('express')
+var router = express.Router()
 
 const {
     getAllEvents,
-    addEvent,
-    updateEventById,
-    getEventById
+    getEventById,
+    getAllEventsAfterCurrentDate
 } = require('../models/events')
 
-const {
-    getAllTickets,
-    bookTicket,
-    deleteTicketByAttendeeEmail,
-    getTicketsByAttendeeEmail
-} = require('../models/tickets')
+const { countAllTicketsAtEventId } = require('../models/tickets')
 
-// router.get('/', async function (req, res, next) {
-//     const events = await getAllEvents()
-//     res.json({ success: true, payload: events })
-// })
-
-// router.get('/:id', async function (req, res, next) {
-//     const id = req.params.id
-//     const event = await getEventById(id)
-//     res.json({ success: true, payload: event })
-// })
-
-// router.post('/', async function (req, res, next) {
-//     const data = req.body
-//     const result = await addEvent(data)
-//     res.json({ success: true, payload: result })
-// })
-
-// router.patch('/:id', async function (req, res) {
-//     const id = req.params.id
-//     const details = req.body
-//     const result = await updateEventById(id, details)
-//     console.log(result)
-//     res.json({
-//         success: true,
-//         payload: `Event with id ${result.id} has been updated.`
-//     })
-// })
+const { convertDateFormat } = require('../models/edit-date.js')
 
 router.get('/', async function (req, res, next) {
+    const events = await getAllEvents()
+    events.forEach((e) => (e.date = convertDateFormat(e.date)))
+    console.log(events)
     res.json({
-        message: 'Route protection active'
+        success: true,
+        payload: events
+    })
+})
+router.get('/date', async function (req, res, next) {
+    const events = await getAllEventsAfterCurrentDate()
+    events.forEach((e) => (e.date = convertDateFormat(e.date)))
+    res.json({ success: true, payload: events })
+})
+
+router.get('/:id', async function (req, res, next) {
+    const id = req.params.id
+    const numberOfTickets = await countAllTicketsAtEventId(id)
+    const event = await getEventById(id)
+    res.json({
+        success: true,
+        payload: { event: event, numTickets: numberOfTickets }
     })
 })
 
-/* TICKETS ROUTES */
+/* -----------------------------------------------------------------------------------------------------------------------------------------------------
+    Tickets Routes
+----------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-router.get('/tickets', async function (req, res) {
-    const tickets = await getAllTickets()
-    res.json({ success: true, payload: tickets })
+//returning the total number of tickets for the event with a given id
+router.get('/:id/tickets', async function (req, res, next) {
+    const id = req.params.id
+    const eventTickets = await countAllTicketsAtEventId(id)
+    res.json({ success: true, payload: eventTickets })
 })
 
-router.get('/tickets/:email', async function (req, res) {
-    const email = req.params.email
-    const tickets = await getTicketsByAttendeeEmail(email)
-    res.json({ success: true, payload: tickets })
-})
+/*
+ADDED TO protected.js - NEED SIGN-IN FOR EVENT REGISTRATION
 
 router.post('/:id/tickets', async function (req, res, next) {
     const { attendeeEmail } = req.body
     const eventId = req.params.id
     const result = await bookTicket(attendeeEmail, eventId)
-    const event = await getEventById(eventId)
-    event.date = convertDateFormat(event.date)
-    newTicketEmail(attendeeEmail, event)
     res.json({ success: true, payload: result })
+})
+*/
+
+/*
+ADDED TO org.js - NEED PERMISSIONS FOR DELETING TICKETS
+
+router.delete('/:id/tickets', async function (req, res) {
+    const eventId = req.params.id
+    await deleteTicketsByEventId(eventId)
+    res.json({
+        success: true
+    })
 })
 
 //double check - there might be a different way using query param.
@@ -87,5 +78,6 @@ router.delete('/:id/tickets/unregister', async function (req, res) {
         success: true
     })
 })
+*/
 
 module.exports = router
