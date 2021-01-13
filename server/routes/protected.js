@@ -51,9 +51,9 @@ router.post('/:id/tickets', async function (req, res, next) {
 })
 
 //double check - there might be a different way using query param.
-router.delete('/:id/tickets/unregister', async function (req, res) {
+router.delete('/:id/tickets', async function (req, res) {
     const eventId = req.params.id
-    const { attendeeEmail } = req.body
+    const attendeeEmail = req.query.email
     await deleteTicketByAttendeeEmail(attendeeEmail, eventId)
     res.json({
         success: true

@@ -56,7 +56,6 @@ async function deleteTicketByAttendeeEmail(attendeeEmail, eventId) {
         `DELETE FROM tickets_table WHERE event_id = $1 AND attendee_email = $2`,
         [eventId, attendeeEmail]
     )
-    console.log(`Event with id ${eventId} deleted.`)
 }
 
 module.exports = {
