@@ -7,12 +7,7 @@ const { convertDateFormat } = require('../models/edit-date')
 
 const { newTicketEmail } = require('../models/nodemailer')
 
-const {
-    getAllEvents,
-    addEvent,
-    updateEventById,
-    getEventById
-} = require('../models/events')
+const { getEventById } = require('../models/events')
 
 const {
     getAllTickets,
