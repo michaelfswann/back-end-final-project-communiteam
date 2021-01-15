@@ -16,7 +16,7 @@ async function getAllTicketsByEventId(id) {
 async function getAllTicketsByAttendeeEmail(email) {
     const result = await query(
         `SELECT * FROM tickets_table
-        INNER JOIN event_table ON event_id = event_table.id
+        INNER JOIN events_table ON event_id = events_table.id
         WHERE attendee_email = $1`,
         [email]
     )

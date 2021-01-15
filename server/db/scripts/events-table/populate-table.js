@@ -1,15 +1,17 @@
 const { query } = require('../../index')
+const { getCloudinaryUrl } = require('../../../models/cloudinary')
 
 const sqlStatement =
-    'INSERT INTO event_table (title, date, time, speaker, banner, description, numtickets, location) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING title;'
+    'INSERT INTO events_table (title, date, time, speaker, banner, description, numtickets, location) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING title;'
 
 async function addEvent(event) {
+    const banner = await getCloudinaryUrl(event.banner)
     const res = await query(sqlStatement, [
         event.title,
         event.date,
         event.time,
         event.speaker,
-        event.banner,
+        banner,
         event.description,
         event.numtickets,
         event.location
@@ -34,7 +36,7 @@ const eventData = [
         title: 'A question of organisation',
         date: '2021-06-30',
         time: '19:00',
-        speaker: 'Tom Bennet',
+        speaker: 'Tom Bennett',
         banner:
             'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReFppENYarhUQF32WCOctpAXZvDm4zJSJElg&usqp=CAU',
         description:
@@ -43,7 +45,7 @@ const eventData = [
         location: 'Zoom'
     },
     {
-        title: "Valentina's Auth0 Masterclass",
+        title: 'Auth0 Masterclass',
         date: '2021-04-21',
         time: '19:30',
         speaker: 'Valentina Militaru',
@@ -101,7 +103,7 @@ const eventData = [
     },
 
     {
-        title: "Amelia's event party",
+        title: 'Party Time',
         date: '2021-01-21',
         time: '22:45',
         speaker: 'Amelia, Tom, Fadumo',
@@ -110,7 +112,7 @@ const eventData = [
         description:
             "Come join the party with pandas, cake, chocolate, snow and really whatever else is wacky and fun. Oh and lots of edible things. Come celebrate finishing SoC and the fact we won't be the first ones with a job. A massive online party will be held to mark this occasion. Bring mentors, ex bootcampers, and basically anyone off the street. Just remember social distancing and all that... no police are raiding this party. Celebrate safely all! ",
         numtickets: 100,
-        location: 'Online Zoom'
+        location: 'Zoom'
     }
 ]
 

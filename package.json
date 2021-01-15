@@ -11,10 +11,7 @@
     "populate-events-table": "node -r dotenv/config ./server/db/scripts/events-table/populate-table.js",
     "create-tickets-table": "node -r dotenv/config ./server/db/scripts/tickets-table/create-table.js",
     "drop-tickets-table": "node -r dotenv/config ./server/db/scripts/tickets-table/drop-table.js",
-    "populate-tickets-table": "node -r dotenv/config ./server/db/scripts/tickets-table/populate-table.js",
-    "create-accounts-table": "node -r dotenv/config ./server/db/scripts/accounts-table/create-table.js",
-    "drop-accounts-table": "node -r dotenv/config ./server/db/scripts/accounts-table/drop-table.js",
-    "populate-accounts-table": "node -r dotenv/config ./server/db/scripts/accounts-table/populate-table.js"
+    "populate-tickets-table": "node -r dotenv/config ./server/db/scripts/tickets-table/populate-table.js"
   },
   "dependencies": {
     "cloudinary": "^1.23.0",

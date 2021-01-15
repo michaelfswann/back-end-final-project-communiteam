@@ -1,11 +1,11 @@
 const { query } = require('../../index')
 
-const sqlStatement = `DROP TABLE IF EXISTS event_table`
+const sqlStatement = `DROP TABLE IF EXISTS events_table`
 
-async function dropEventTable() {
+async function dropEventsTable() {
     const res = await query(sqlStatement)
 
-    console.log(`Log: event_table dropped`)
+    console.log(`Log: events_table dropped`)
 }
 
-dropEventTable()
+dropEventsTable()
