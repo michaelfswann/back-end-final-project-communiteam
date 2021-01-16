@@ -1,7 +1,7 @@
 {
-    "family": "communiteam-server",
+    "family": "sat-16-ec2-task-def",
     "executionRoleArn": "arn:aws:iam::007555096130:role/ecsTaskExecutionRole",
-    "networkMode": "awsvpc",
+    "networkMode": "bridge",
     "containerDefinitions": [
         {
             "name": "communiteam-server",
@@ -14,7 +14,7 @@
             "portMappings": [
                 {
                     "containerPort": 5000,
-                    "hostPort": 5000,
+                    "hostPort": 8888,
                     "protocol": "tcp"
                 }
             ],
@@ -22,8 +22,8 @@
         }
     ],
     "requiresCompatibilities": [
-        "FARGATE"
+        "EC2"
     ],
-    "cpu": "512",
-    "memory": "1024"
+    "cpu": "1024",
+    "memory": "128"
 }
