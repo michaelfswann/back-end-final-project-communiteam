@@ -1,5 +1,11 @@
 #!/bin/bash
 
+##################
+##################
+### NOT IN USE ###
+##################
+##################
+
 # run as bash ./deploy-ecs.sh -b communiteam -s node-server -e ${DEPLOYMENT_ENV} -i ${DEPLOYMENT_ENV}_${VERSION_NUMBER} 
 
 set -e
