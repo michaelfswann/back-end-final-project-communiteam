@@ -1,6 +1,6 @@
 # EVENTURE Restful API
 
-![eventure logo](/https://eventure.vercel.app/eVenture.png)
+![eventure logo](https://i.ibb.co/CmQZSZb/eVenture.png)
 
 This server handles http requests made by [Eventure](https://eventure.vercel.app) client.
 
